@@ -59,22 +59,32 @@ let answer4Text = [
 ]
 
 let answers = {
-  q1: 3,
-  q2: 2,
-  q3: 3,
-  q4: 4,
-  q5: 4,
-  q6: 1,
-  q7: 3,
-  q8: 2,
-  q9: 2
+  1: 3,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 4,
+  6: 1,
+  7: 3,
+  8: 2,
+  9: 2
 }
 
 let qNumber = 1 // first question
 let x = 0 // starts at 0 for 1st question
+let answerGiven
+let trueAnswer
+let questionNumber = 1
+let anum = 1
+let numCorrect = 0
+let numWrong = 0
 const next = document.getElementById('nextQuestion'); // button for next
 const start = document.getElementById('start'); // button to start quiz
 const deduct = document.getElementById('deductTime'); // button to deduct time
+const answer1 = document.getElementById('answer1');
+const answer2 = document.getElementById('answer2');
+const answer3 = document.getElementById('answer3');
+const answer4 = document.getElementById('answer4');
 
 function nextQuestion() { // first fires when the start button is pressed
   document.getElementById("questionNumber").innerHTML = "Question #" + qNumber;
@@ -84,6 +94,54 @@ function nextQuestion() { // first fires when the start button is pressed
   document.getElementById("answer3").innerHTML = answer3Text[x];
   document.getElementById("answer4").innerHTML = answer4Text[x];
 }
+
+answer1.addEventListener('click', ev => {
+  answerGiven = 1
+  buttonChange = document.getElementById("answer1")
+  checkAnswer(); // check answer
+});
+
+answer2.addEventListener('click', ev => {
+  answerGiven = 2
+  buttonChange = document.getElementById("answer2")
+  checkAnswer(); // check answer
+});
+
+answer3.addEventListener('click', ev => {
+  // document.getElementById('answer2').classList.remove('btn-dark');
+  // document.getElementById('answer2').classList.add('btn-light');
+  answerGiven = 3
+  buttonChange = document.getElementById("answer3")
+  checkAnswer(); // check answer
+});
+
+answer4.addEventListener('click', ev => {
+  // document.getElementById('answer2').classList.remove('btn-dark');
+  // document.getElementById('answer2').classList.add('btn-light');
+  answerGiven = 4
+  buttonChange = document.getElementById("answer4")
+  checkAnswer(); // check answer
+});
+
+function checkAnswer() {
+  if (answers[anum] == answerGiven) {
+    buttonChange.classList.remove('btn-dark');
+    buttonChange.classList.add('btn-primary');
+    numCorrect++
+  } else {
+    buttonChange.classList.remove('btn-dark');
+    buttonChange.classList.add('btn-danger');
+    numWrong++
+    deductTime()
+  }
+}
+
+
+
+
+// Still don't have the deduct time portion working right. Need it to take seconds away, not days.
+// ___________________________________________________________________
+// Timer Function
 
 // I don't remeber where I got this countdown code from. I had a link for it, but can't find it anywhere.
 // I heavily modified it. You can probably guess that it was meant as a countdown to a date, but any port in a storm.
@@ -120,10 +178,28 @@ function update() {
   startThis() // loop back to what starts update
 }
 
+
+// ____________________________________________________
+// Event listeners
+
 next.addEventListener('click', ev => { // listener for next
-  x++;
+  document.getElementById("right").innerHTML = numCorrect
+  document.getElementById("wrong").innerHTML = numWrong
+  anum++;
   qNumber++
-  nextQuestion() // increases x and qNumber and then onto nextQuestion
+  document.getElementById('answer1').classList.remove('btn-danger');
+  document.getElementById('answer1').classList.remove('btn-primary');
+  document.getElementById('answer1').classList.add('btn-dark');
+  document.getElementById('answer2').classList.remove('btn-danger');
+  document.getElementById('answer2').classList.remove('btn-primary');
+  document.getElementById('answer2').classList.add('btn-dark');
+  document.getElementById('answer3').classList.remove('btn-danger');
+  document.getElementById('answer3').classList.remove('btn-primary');
+  document.getElementById('answer3').classList.add('btn-dark');
+  document.getElementById('answer4').classList.remove('btn-danger');
+  document.getElementById('answer4').classList.remove('btn-primary');
+  document.getElementById('answer4').classList.add('btn-dark');
+  nextQuestion() // increases anum and qNumber and then onto nextQuestion
 });
 
 start.addEventListener('click', ev => { // listener for next
@@ -134,96 +210,7 @@ deduct.addEventListener('click', ev => { // listener for next
   deductTime(); // deducts time
 });
 
-function deductTime() {
+function deductTime() { // function to deduct time - still don't know how to adjust this properly
   countDownDate.setDate(countDownDate.getDate() - 1)
   update();
 }
-
-
-
-
-
-
-
-
-
-// Does not work - timer works, but not deduct
-
-// Needs to have wrong answer deduct time - How?
-
-
-// const deductTime = document.getElementById('deductTime')
-
-// const timerElement = document.getElementById('timerCountDown');
-
-// const next = document.getElementById('nextQuestion'); // button for next
-
-// let timer;
-
-// let deduct100 = false;
-
-// timerElement.addEventListener('click', ev => { // timer button starts countdown and 1st question
-//   startTimeCountDown();
-//   nextQuestion(); // stars Q(1) and A[0]
-// })
-
-// deductTime.addEventListener('click', ev => { // listener for
-//   deductTimeWrong();
-// });
-
-// next.addEventListener('click', ev => { // listener for next
-//   x++;
-//   qNumber++
-//   nextQuestion() // increases x and qNumber and then up to nextQuestion
-// });
-
-// function startTimeCountDown() { // start the timer
-//   timer = 1000; 
-//   const timeCountdown = setInterval(countdown, 1000);
-// }
-
-// function deductTimeWrong() { // not working
-//   deduct100 = true
-// }
-
-// function countdown() {
-//   if (timer == 0) {
-//     clearTimeout(timer);
-//     timerElement.innerHTML = 'Start' // begining text
-//   } else {
-//     timerElement.innerHTML = timer + ' secs'; // timer injected to html
-//     timer--;
-//   } if (timer == 0) {
-//     timerElement.innerHTML = "Time is up."; // end is injected to html
-//   }
-// }
-
-
-
-
-// Timer that works
-
-// const timerElement = document.getElementById('timerCountDown');
-// let timer;
-
-// function startTimeCountDown() {
-//   timer = 10;
-//   const timeCountdown = setInterval(countdown, 1000);
-// }
-
-// function countdown() {
-//   if (timer == 0) {
-//     clearTimeout(timer);
-//     timerElement.innerHTML = 'Start'
-//   } else {
-//     timerElement.innerHTML = timer + ' secs';
-//     timer--;
-//   }
-//   if (timer == 0) {
-//     timerElement.innerHTML = "Time is up.";
-//   }
-// }
-
-// timerElement.addEventListener('click', ev => {
-//   startTimeCountDown();
-// });
