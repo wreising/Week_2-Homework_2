@@ -71,13 +71,9 @@ let answers = {
 }
 
 let qNumber = 1 // first question
-
 let x = 0 // starts at 0 for 1st question
-
 const next = document.getElementById('nextQuestion'); // button for next
-
 const start = document.getElementById('start'); // button to start quiz
-
 const deduct = document.getElementById('deductTime'); // button to deduct time
 
 function nextQuestion() { // first fires when the start button is pressed
@@ -95,7 +91,12 @@ function nextQuestion() { // first fires when the start button is pressed
 var today = new Date(); // Set the date we're counting down to
 var countDownDate = new Date(today.getTime() + (60 * 60 * 60 * 1000));
 
+function startThis() {
+  var y = setInterval(update, 1000); // Update the count down every 1 second
+}
+
 function update() {
+
   nextQuestion()
 
   var now = new Date().getTime(); // Get today's date and time
@@ -109,19 +110,14 @@ function update() {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   // Output the result in an element with id="start"
-  document.getElementById("start").innerHTML = days + "d " + hours + "h "
-    + minutes + "m " + seconds + "s ";
+  document.getElementById("start").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
 
   // If the count down reaches zero display message
   if (distance < 0) {
     clearInterval(y);
-    document.getElementById("start").innerHTML = "Time is over.";
+    document.getElementById("start").innerHTML = "Time is up.";
   }
-  startThis()
-}
-// Update the count down every 1 second
-function startThis() {
-  var y = setInterval(update, 1000);
+  startThis() // loop back to what starts update
 }
 
 next.addEventListener('click', ev => { // listener for next
@@ -131,14 +127,13 @@ next.addEventListener('click', ev => { // listener for next
 });
 
 start.addEventListener('click', ev => { // listener for next
-  update(); // should start the timer?
+  update(); // starts the timer
 });
 
 deduct.addEventListener('click', ev => { // listener for next
-  deductTime(); // should deduct
+  deductTime(); // deducts time
 });
 
-// for some reason this can't call the update function in the start function
 function deductTime() {
   countDownDate.setDate(countDownDate.getDate() - 1)
   update();
