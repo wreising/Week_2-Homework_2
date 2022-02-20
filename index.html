@@ -12,34 +12,36 @@
 <body>
   <header>
     <h1>Javascript Quiz</h1>
-    <h2>Time left: <span id="timerCountDown" class="lead">Start</span><br>
-      <span id="deductTime" class="lead">Deduct</span></h2>
+    <h2>Time left: <span id="start" class="btn lead">Start</span><br>
+      <span id="deductTime" class="btn lead">Deduct</span></h2>
   </header>
 
 <div>
   <div class="card mx-auto" style="width: 80%;">
     <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted" id="questionNumber">Question #</h6>
-      <p class="card-text" id="questionText">Here is the qustion: 
+      <h6 class="card-subtitle mb-2 text-muted" id="questionNumber">Question #__</h6>
+      <p class="card-text" id="question">Question text: 
       </p>
       <br>
       <div class="container answers">
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start" id="answer1">Lorem ipsum</a>
+          <a class="btn btn-dark mx-auto my-1 text-start" id="answer1">Answer A</a>
         </div>
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start" id="answer2">Lorem ipsum</a>
+          <a class="btn btn-dark mx-auto my-1 text-start" id="answer2">Answer B</a>
         </div>
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start" id="answer3">Lorem ipsum</a>
+          <a class="btn btn-dark mx-auto my-1 text-start" id="answer3">Answer C</a>
         </div>
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start" id="answer4">Lorem ipsum</a>
+          <a class="btn btn-dark mx-auto my-1 text-start" id="answer4">Answer D</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<h2><span id="nextQuestion" class="btn lead">Next Question</span></h2>
 
   <footer>
 © William Reising 2022
