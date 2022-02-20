@@ -18,7 +18,7 @@
   </header>
 
 <div>
-  <div class="card mx-auto" style="width: 80%;">
+  <div class="card mx-auto" style="width: 80%">
     <div class="card-body" id="card-body">
       <h6 class="card-subtitle mb-2 text-muted" id="questionNumber">Question #</h6>
       <p class="card-text" id="question">Questions will be here. 
@@ -46,7 +46,13 @@
 <h4><span id="saveBox" class="btn btn-outline-dark" style="display: none">Save Score</span></h4>
 <h2 id="rightBox">Correct: <span class="lead" id="right"></span></h2>
 <h2 id="wrongBox">Incorrect: <span class="lead" id="wrong"></span></h2>
-<h4 id="highScoreBox" style="display: none;">High Score: <span id="highScoreD"></span></h4>
+<h4 id="highScoreBox" style="display: none;">
+  <span id="newHighScoreText">Previous</span> High Score: <span id="highScoreD"></span></h4>
+<h4>Previous player: 
+  <span id="previousInitials"></span> , Score: 
+  <span id="previousRight"></span> Correct & 
+  <span id="previousWrong"></span> Incorrect.</h4>
+<h4><span id="playAgain" class="btn btn-outline-dark" style="display: none">Play Again?</span></h4>
 
   <footer>
 © William Reising 2022

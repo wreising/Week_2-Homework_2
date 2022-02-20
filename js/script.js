@@ -1,3 +1,8 @@
+// javascript file (script.js) for the Quiz Project
+
+// variables
+// _____________________________________________________________________
+
 let qNumber = 1 // first question
 let x = 0 // starts at 0 for 1st question
 let answerGiven
@@ -7,7 +12,10 @@ let anum = 1
 let numCorrect = 0
 let numWrong = 0
 let isFinished = false
-let highScoreSaved = localStorage.getItem("highCorrect")
+let highScoreSaved = localStorage.getItem("highCorrect") // retreive from local storage
+let previousInitialsStored = localStorage.getItem("initials") // retreive from local storage
+let previousRightStored = localStorage.getItem("right") /// retreive from local storage
+let previousWrongStored = localStorage.getItem("wrong") // retreive from local storage
 const next = document.getElementById('nextQuestion'); // button for next
 const start = document.getElementById('start'); // button to start quiz
 const deduct = document.getElementById('deductTime'); // button to deduct time
@@ -17,13 +25,21 @@ const answer3 = document.getElementById('answer3');
 const answer4 = document.getElementById('answer4');
 const cardBody = document.getElementById("card-body")
 const saveBox = document.getElementById("saveBox")
+const playAgain = document.getElementById("playAgain")
 const right = document.getElementById("right")
 const wrong = document.getElementById("wrong")
 const nextDiv = document.getElementById("nextDiv")
 const highScoreBox = document.getElementById("highScoreBox")
 const rightBox = document.getElementById("rightBox")
 const wrongBox = document.getElementById("wrongBox")
+const newHighScoreText = document.getElementById("newHighScoreText")
+const previousInitials = document.getElementById("previousInitials")
+const previousRight = document.getElementById("previousRight")
+const previousWrong = document.getElementById("previousWrong")
 
+
+// functions
+// ________________________________________________________________
 function nextQuestion() { // first fires when the start button is pressed
   document.getElementById("questionNumber").innerHTML = "Question #" + qNumber;
   document.getElementById("question").innerHTML = questionText[x];
@@ -33,15 +49,23 @@ function nextQuestion() { // first fires when the start button is pressed
   document.getElementById("answer4").innerHTML = answer4Text[x];
 }
 
+onload = previousPlayer // loads stats of previous plater from local storage
+
+function previousPlayer() { // function for loading previous player
+  document.getElementById("previousInitials").innerHTML = previousInitialsStored
+  document.getElementById("previousRight").innerHTML = previousRightStored
+  document.getElementById("previousWrong").innerHTML = previousWrongStored
+}
+
 answer1.addEventListener('click', ev => {
   answerGiven = 1
-  buttonChange = document.getElementById("answer1")
+  answerKey = document.getElementById("answer1")
   checkAnswer(); // check answer
 });
 
 answer2.addEventListener('click', ev => {
   answerGiven = 2
-  buttonChange = document.getElementById("answer2")
+  answerKey = document.getElementById("answer2")
   checkAnswer(); // check answer
 });
 
@@ -49,7 +73,7 @@ answer3.addEventListener('click', ev => {
   // document.getElementById('answer2').classList.remove('btn-dark');
   // document.getElementById('answer2').classList.add('btn-light');
   answerGiven = 3
-  buttonChange = document.getElementById("answer3")
+  answerKey = document.getElementById("answer3")
   checkAnswer(); // check answer
 });
 
@@ -57,18 +81,18 @@ answer4.addEventListener('click', ev => {
   // document.getElementById('answer2').classList.remove('btn-dark');
   // document.getElementById('answer2').classList.add('btn-light');
   answerGiven = 4
-  buttonChange = document.getElementById("answer4")
+  answerKey = document.getElementById("answer4")
   checkAnswer(); // check answer
 });
 
 function checkAnswer() {
   if (answers[anum] == answerGiven) {
-    buttonChange.classList.remove('btn-dark');
-    buttonChange.classList.add('btn-primary');
+    answerKey.classList.remove('btn-dark');
+    answerKey.classList.add('btn-primary');
     numCorrect++
   } else {
-    buttonChange.classList.remove('btn-dark');
-    buttonChange.classList.add('btn-danger');
+    answerKey.classList.remove('btn-dark');
+    answerKey.classList.add('btn-danger');
     numWrong++
     deductTime()
   }
@@ -83,6 +107,7 @@ function finished() {
   wrongBox.style.display = "none";
   nextDiv.style.display = "none";
   saveBox.style.display = "inline";
+  playAgain.style.display = "inline";
   highScoreBox.style.display = "block";
   document.getElementById("highScoreD").innerHTML = highScoreSaved
 }
@@ -95,6 +120,7 @@ function saveScore() {
   if (highScoreSaved < numCorrect) {
     localStorage.setItem("highCorrect", numCorrect);
     document.getElementById("highScoreD").innerHTML = numCorrect
+    document.getElementById("newHighScoreText").innerHTML = "New"
   } else {
     document.getElementById("highScoreD").innerHTML = highScoreSaved
   }
@@ -141,9 +167,13 @@ function update() {
   startThis() // loop back to what starts update
 }
 
+function deductTime() { // function to deduct time - still don't know how to adjust this properly
+  countDownDate.setDate(countDownDate.getDate() - 1)
+  update();
+}
 
-// ____________________________________________________
 // Event listeners
+// ____________________________________________________
 
 next.addEventListener('click', ev => { // listener for next
   document.getElementById("right").innerHTML = numCorrect
@@ -178,76 +208,75 @@ saveBox.addEventListener('click', ev => { // listener for next
   saveScore(); // show the save button
 });
 
-// deduct.addEventListener('click', ev => { // listener for next
-//   deductTime(); // deducts time
-// });
+playAgain.addEventListener('click', ev => { // listener for next
+  window.location.reload(); // reload the page
+});
 
-function deductTime() { // function to deduct time - still don't know how to adjust this properly
-  countDownDate.setDate(countDownDate.getDate() - 1)
-  update();
-}
 
-let questionText = [
+// Questions and Answers
+// ___________________________________________________________________
+
+let questionText = [ // Questions
   "What is the standard 'Primary' color for Bootstrap?",
   "What is contained in an Object?",
-  "question 3 text",
-  "question 4 text",
-  "question 5 text",
-  "question 6 text",
-  "question 7 text",
-  "question 8 text",
-  "question 9 text"
+  "What is Bootstrap?",
+  "Which combination contains valid JS operators?",
+  "Javascript scripts cannot be located:",
+  "Bootstrap 5 does not require JQuery.",
+  "The defult arrangement for Bootstrap button groups is:",
+  "Variables declared with const can be changed by:",
+  "Which of the following is not an object?"
 ]
 
-let answer1Text = [
+let answer1Text = [ // all of the answers for the 1st button
   "Red",
   "value, 'Key'",
-  "answer1 3 text",
-  "answer1 4 text",
-  "answer1 5 text",
-  "answer1 6 text",
-  "answer1 7 text",
-  "answer1 8 text",
-  "answer1 9 text"
+  "HTML library",
+  "&&, %, ++, -",
+  "the <head> element of a .html file",
+  "True",
+  "together, verticle, flush left",
+  "reset with const ___ = ___",
+  "array"
 ]
 
-let answer2Text = [
+let answer2Text = [ // all of the answers for the 2nd button
   "Green",
   "'Key', value",
-  "answer2 3 text",
-  "answer2 4 text",
-  "answer2 5 text",
-  "answer2 6 text",
-  "answer2 7 text",
-  "answer2 8 text",
-  "answer2 9 text"
+  "JS library",
+  "<, /, --, &",
+  "before the </body> tag.",
+  "False",
+  "spread out with equal space between",
+  "it can't be changed",
+  "function"
 ]
 
-let answer3Text = [
+let answer3Text = [ // all of the answers for the 3rd button
   "Blue",
   "'value', 'Key'",
-  "answer3 3 text",
-  "answer3 4 text",
-  "answer3 5 text",
-  "answer3 6 text",
-  "answer3 7 text",
-  "answer3 8 text",
-  "answer3 9 text"
+  "Both JS and CSS library",
+  "++, *, -, >",
+  "inline within <element> tags",
+  "",
+  "together, horizontal, flush left",
+  "reset with var ___ = ___",
+  "object"
 ]
 
-let answer4Text = [
+let answer4Text = [ // all of the answers for the 4th button
   "Yellow",
   "value, Key",
-  "answer4 3 text",
-  "answer4 4 text",
-  "answer4 5 text",
-  "answer4 6 text",
-  "answer4 7 text",
-  "answer4 8 text",
-  "answer4 9 text"
+  "CSS library",
+  "**, /, %, --",
+  "first line of a .html file",
+  "",
+  "hoizontal, flush left, with 10px margin",
+  "reset with let ___ = ___",
+  "string"
 ]
 
-let answers = {
+let answers = { // answer key
   1: 3,
   2: 2,
   3: 3,
