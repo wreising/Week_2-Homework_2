@@ -11,39 +11,42 @@
 </head>
 <body>
   <header>
-    <h1>Javascript Quiz</h1>
-    <h2>Time left: <span id="start" class="btn lead">Start</span><br>
-      <span id="deductTime" class="btn lead">Deduct</span></h2>
+    <h1 id="title">Javascript Quiz</h1>
+    <h2>Time left: <span id="start" class="btn btn-outline-dark">Start</span>
+      <!-- <br><span id="deductTime" class="btn btn-outline-dark">Deduct</span> -->
+    </h2>
   </header>
 
 <div>
   <div class="card mx-auto" style="width: 80%;">
-    <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted" id="questionNumber">Question #__</h6>
-      <p class="card-text" id="question">Question text: 
+    <div class="card-body" id="card-body">
+      <h6 class="card-subtitle mb-2 text-muted" id="questionNumber">Question #</h6>
+      <p class="card-text" id="question">Questions will be here. 
       </p>
       <br>
       <div class="container answers">
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer1">Answer A</a>
+          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer1">Click for Answer A</a>
         </div>
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer2">Answer B</a>
+          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer2">Click for Answer B</a>
         </div>
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer3">Answer C</a>
+          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer3">Click for Answer C</a>
         </div>
         <div class="row">
-          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer4">Answer D</a>
+          <a class="btn btn-dark mx-auto my-1 text-start box" id="answer4">Click for Answer D</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<h2><span id="nextQuestion" class="btn lead">Next Question</span></h2>
-<h2 class="lead" id="right">Correct</h2>
-<h2 class="lead" id="wrong">Incorrect</h2>
+<h3 id="nextDiv"><span id="nextQuestion" class="btn btn-outline-dark">Next Question</span></h3>
+<h4><span id="saveBox" class="btn btn-outline-dark" style="display: none">Save Score</span></h4>
+<h2 id="rightBox">Correct: <span class="lead" id="right"></span></h2>
+<h2 id="wrongBox">Incorrect: <span class="lead" id="wrong"></span></h2>
+<h4 id="highScoreBox" style="display: none;">High Score: <span id="highScoreD"></span></h4>
 
   <footer>
 © William Reising 2022
@@ -54,3 +57,5 @@
 <script src="js/script.js"></script>
 </body>
 </html>
+
+<!-- gosub --> 

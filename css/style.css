@@ -45,12 +45,37 @@ h1 {
 h2 {
   font-size: 1.5em;
   font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
-  color: rgb(249, 107, 24);
+  color: rgb(8, 40, 180);
   border-top: 2px dotted rgb(22, 124, 165);
   border-bottom: 2px dotted rgb(22, 124, 165);
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 15px 0 15px 0;
+  overflow: hidden;
+}
+
+h3 {
+  font-size: 1em;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  color: rgb(64, 79, 163);
+  border-top: 2px dotted rgb(22, 124, 165);
+  border-bottom: 2px dotted rgb(22, 124, 165);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 15px 0 15px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+h4 {
+  font-size: 1.25em;
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  color: rgb(64, 79, 163);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 15px 0 15px 0;
+  text-align: center;
   overflow: hidden;
 }
 
