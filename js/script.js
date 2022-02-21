@@ -1,7 +1,7 @@
 // javascript file (script.js) for the Quiz Project
 
 // variables
-// _____________________________________________________________________
+// ____________________________________________________
 
 let qNumber = 1 // first question
 let x = 0 // starts at 0 for 1st question
@@ -37,9 +37,9 @@ const previousInitials = document.getElementById("previousInitials")
 const previousRight = document.getElementById("previousRight")
 const previousWrong = document.getElementById("previousWrong")
 
-
 // functions
-// ________________________________________________________________
+// ____________________________________________________
+
 function nextQuestion() { // first fires when the start button is pressed
   document.getElementById("questionNumber").innerHTML = "Question #" + qNumber;
   document.getElementById("question").innerHTML = questionText[x];
@@ -109,7 +109,14 @@ function finished() {
   saveBox.style.display = "inline";
   playAgain.style.display = "inline";
   highScoreBox.style.display = "block";
-  document.getElementById("highScoreD").innerHTML = highScoreSaved
+  timeleft = 0
+  if (highScoreSaved < numCorrect) {
+    document.getElementById("newHighScoreText").innerHTML = "New"
+    document.getElementById("highScoreD").innerHTML = numCorrect
+  } else {
+    document.getElementById("newHighScoreText").innerHTML = "Previous"
+    document.getElementById("highScoreD").innerHTML = highScoreSaved
+  }
 }
 
 function saveScore() {
@@ -120,56 +127,42 @@ function saveScore() {
   if (highScoreSaved < numCorrect) {
     localStorage.setItem("highCorrect", numCorrect);
     document.getElementById("highScoreD").innerHTML = numCorrect
-    document.getElementById("newHighScoreText").innerHTML = "New"
-  } else {
-    document.getElementById("highScoreD").innerHTML = highScoreSaved
+    //   document.getElementById("newHighScoreText").innerHTML = "New"
+    // } else {
+    //   document.getElementById("newHighScoreText").innerHTML = "Current"
+    //   document.getElementById("highScoreD").innerHTML = highScoreSaved
   }
 }
 
-
-// Still don't have the deduct time portion working right. Need it to take seconds away, not days.
-// ___________________________________________________________________
+// Still don't have the deduct time portion working right.
+// ____________________________________________________
 // Timer Function
 
-// I don't remeber where I got this countdown code from. I had a link for it, but can't find it anywhere.
-// I heavily modified it. You can probably guess that it was meant as a countdown to a date, but any port in a storm.
+//https://stackoverflow.com/a/31106229/17557927
 
-var today = new Date(); // Set the date we're counting down to
-var countDownDate = new Date(today.getTime() + (60 * 60 * 60 * 1000));
+let timeleft = 0
 
-function startThis() {
-  let y = setInterval(update, 1000); // Update the count down every 1 second
+function deductTime() {
+  timeleft -= 5
 }
 
 function update() {
 
   nextQuestion()
 
-  var now = new Date().getTime(); // Get today's date and time
+  timeleft = 50
 
-  var distance = countDownDate - now; // Find the distance between now and the count down date
+  let downloadTimer = setInterval(function () {
+    if (timeleft <= 0) {
+      clearInterval(downloadTimer);
+      finished()
+      document.getElementById("start").innerHTML = "Finished";
+    } else {
+      document.getElementById("start").innerHTML = timeleft + " seconds remaining";
+    }
+    timeleft -= 1
+  }, 1000);
 
-  // Time calculations for days, hours, minutes and seconds
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // Output the result in an element with id="start"
-  document.getElementById("start").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-  // If the count down reaches zero display message
-  if (distance < 0) {
-    clearInterval(y);
-    finished()
-    document.getElementById("start").innerHTML = "Time is up.";
-  }
-  startThis() // loop back to what starts update
-}
-
-function deductTime() { // function to deduct time - still don't know how to adjust this properly
-  countDownDate.setDate(countDownDate.getDate() - 1)
-  update();
 }
 
 // Event listeners
@@ -214,7 +207,7 @@ playAgain.addEventListener('click', ev => { // listener for next
 
 
 // Questions and Answers
-// ___________________________________________________________________
+// ____________________________________________________
 
 let questionText = [ // Questions
   "What is the standard 'Primary' color for Bootstrap?",
