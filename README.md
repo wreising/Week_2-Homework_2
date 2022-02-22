@@ -22,3 +22,5 @@ You are required to submit the following for review:
 * The URL of the functional, deployed application.
 
 * The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+
+https://github.com/wreising/Week_2-Homework_2.git
