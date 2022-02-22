@@ -17,10 +17,12 @@ Javascript Code Quiz
      ✅ THEN I can save my initials and score
 ```
 
-You are required to submit the following for review:
+## You are required to submit the following for review:
 
-* The URL of the functional, deployed application.
+✅ The URL of the functional, deployed application.
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+https://wreising.github.io/Week_2-Homework_2/
+
+✅ The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
 
 https://github.com/wreising/Week_2-Homework_2.git
