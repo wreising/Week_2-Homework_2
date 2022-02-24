@@ -152,7 +152,7 @@ function update() { //timer function
     } else {
       document.getElementById("start").innerHTML = timeleft + " seconds remaining"; // countdown timer on the page
     }
-    timeleft -= 1 // I have no idea what this does. All I know is that it is needed to make this all work
+    timeleft -= 1 // takes timeLeft and subtracts1 ?
   }, 1000); // milliseconds - makes the 50 above 50 seconds instead of needing to put 50000 as the value
 
 }
